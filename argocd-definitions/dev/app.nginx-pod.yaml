@@ -10,7 +10,7 @@ spec:
   project: default
   destination:
     namespace: nginx-pod-dev
-    name: k3d-codefresh-test2
+    name: in-cluster
   source:
     repoURL: https://github.com/Men-io/cd-five-mins-local-test.git
     targetRevision: main
