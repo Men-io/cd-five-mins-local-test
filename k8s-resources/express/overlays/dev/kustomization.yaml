@@ -5,8 +5,4 @@ kind: Kustomization
 resources:
   - ../../base
 
-images:
-  - name: quay.io/codefresh_sa/express
-    newTag: "5416e81"
-
 namespace: codefresh
