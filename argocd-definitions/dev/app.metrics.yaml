@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metrics-dev
+  labels:
+    app: metrics-dev
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: metrics-dev
+    name: in-cluster
+  source:
+    repoURL: https://github.com/Men-io/cd-five-mins-local-test.git
+    targetRevision: main
+    path: ./k8s-resources/kube-state-metrics/dev
+    helm:
+      parameters:
+        - name: buildID
+          value: argocd
+      valueFiles:
+        - values.yaml
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
