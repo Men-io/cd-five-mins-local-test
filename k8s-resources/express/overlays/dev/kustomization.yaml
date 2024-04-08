@@ -2,9 +2,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namePrefix: codefresh
-
-bases:
+resources:
   - ../../base
 
 images:
@@ -12,6 +10,3 @@ images:
     newTag: "5416e81"
 
 namespace: codefresh
-
-resources:
-  - ../../base
