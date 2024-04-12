@@ -5,9 +5,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'file:////Users/mennosanders/git/argocd'
+    repoURL: https://github.com/Men-io/cd-five-mins-local-test.git
     targetRevision: main
-    path: base
+    path: argocd-install/base
   destination:
     namespace: argocd
     name: in-cluster
