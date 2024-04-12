@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/Men-io/cd-five-mins-local-test.git
     targetRevision: main
-    path: argocd-definitions/dev
+    path: argocd-definitions/akuity-tst
     helm:
       parameters:
         - name: cluster
