@@ -3,28 +3,29 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metrics-dev
-  labels:
-    app: metrics-dev
+  name: {{ .Release.Name }}-metrics-server
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
   destination:
-    namespace: metrics-dev
-    name: in-cluster
+    namespace: metrics
+    server: {{ .Values.cluster | quote }}
   source:
+    path: ./k8s-resources/kube-state-metrics/dev
     repoURL: https://github.com/Men-io/cd-five-mins-local-test.git
     targetRevision: {{ .Values.apps.metricsServerVersion | quote }}
-    path: ./k8s-resources/kube-state-metrics/dev
     helm:
-      parameters:
-        - name: buildID
-          value: argocd
+      releaseName: metrics-server #this prevents using the argocd app name as release name.
       valueFiles:
         - values.yaml
+  project: {{ .Release.Name }}
   syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
     automated:
       prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{ end }}
