@@ -5,24 +5,5 @@ resources:
   - namespace.yaml
   - ../releases/v2.10.1
   - applications
-  #- approjects
-  #- repositories
-  #- ingress
-  #- config/secret-workflows-sso.yaml
-  #- servicemonitors
 
 namespace: argocd
-
-#patches:
-#  - path: config/argocd-rbac-cm.yaml
-#  - path: config/argocd-cm.yaml
-#  - path: config/argocd-cm-params.yaml
-#  - path: config/argocd-tls.yaml
-#  - path: config/deployment-applicationset.yaml
-#  - path: config/deployment-dex-server.yaml
-#  - path: config/deployment-notifications.yaml
-#  - path: config/deployment-redis-ha.yaml
-#  - path: config/deployment-repo-server.yaml
-#  - path: config/deployment-server.yaml
-#  - path: config/statefullset-applicationcontroller.yaml
-#  - path: config/statefullset-redis-server.yaml
