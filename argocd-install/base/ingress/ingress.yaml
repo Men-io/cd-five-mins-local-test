@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd.research.erasmusmc.nl
+  namespace: argocd
+  annotations:
+    external-dns.alpha.kubernetes.io/target: kube-ms.research.erasmusmc.nl
+    cert-manager.io/private-key-algorithm: ECDSA
+    cert-manager.io/cluster-issuer: sectigo-infoblox
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: argocd.research.erasmusmc.nl
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: 
+            name: argocd-server
+            port:
+              name: https
+  tls:
+  - hosts:
+    - argocd.research.erasmusmc.nl
+    secretName: argocd-secret # do not change, this is provided by Argo CD

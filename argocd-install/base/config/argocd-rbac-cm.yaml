@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/name: argocd-rbac-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-rbac-cm
+data:
+  # policy.csv is an file containing user-defined RBAC policies and role definitions (optional).
+  # Policy rules are in the form:
+  #   p, subject, resource, action, object, effect
+  # Role definitions and bindings are in the form:
+  #   g, subject, inherited-subject
+  # See https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md for additional information.
+  policy.csv: |
+    p, role:cluster-registration, applications, *, */*, allow
+    p, role:cluster-registration, clusters, *, *, allow
+    p, role:cluster-registration, projects, *, *, allow
+    g, admin, role:admin
+    g, cluster-registration, role:cluster-registration
+    g, RESEARCH_KUBE0001_LINUX_ROOT, role:admin
+    g, RESEARCH_KUBE0002_LINUX_ROOT, role:admin

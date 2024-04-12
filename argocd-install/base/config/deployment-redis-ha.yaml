@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-redis-ha-haproxy
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: argocd-redis-ha-haproxy
+  template:
+    spec:
+      containers:
+        - name: haproxy
+          resources:
+            requests:
+              cpu: 10m
+              memory: 76Mi
+            limits:
+              memory: 128Mi
+      initContainers:
+        - name: config-init
